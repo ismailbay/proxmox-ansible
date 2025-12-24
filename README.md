@@ -18,6 +18,20 @@ Manage Proxmox nodes with Ansible, avoiding ClickOps and learn Ansible by workin
 
 ## Usage
 
+Wake up machines:
+
+```bash
+ansible-playbook playbooks/wakeonlan.yml
+```
+Execute the playbooks:
+
 ```bash
 ansible-playbook playbooks/base.yml
+ansible-playbook playbooks/...
+```
+
+Shut down as option:
+
+```
+ansible-playbook playbooks/shutdown.yml
 ```
