@@ -2,7 +2,7 @@
   hosts: proxmox
   gather_facts: true
   become: true
-  
+
   pre_tasks:
     - name: Run optional backup role
       include_role:
