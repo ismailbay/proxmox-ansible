@@ -1,0 +1,11 @@
+ansible_python_interpreter: /usr/bin/python3
+
+proxmox:
+  timezone: Europe/Vienna
+
+  base_packages:
+    - vim
+    - curl
+    - htop
+    - ca-certificates
+    - gnupg

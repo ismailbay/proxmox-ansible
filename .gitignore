@@ -1,0 +1,83 @@
+# =========================
+# Ansible runtime artifacts
+# =========================
+*.retry
+*.log
+ansible.log
+# Ansible local runtime/cache
+.ansible/
+
+# =========================
+# Inventory & secrets
+# =========================
+# Do NOT ignore example inventories
+inventory/**/group_vars/*vault*
+inventory/**/host_vars/*vault*
+group_vars/*vault*
+host_vars/*vault*
+
+# Common secret files
+**/*vault.yml
+**/*vault.yaml
+**/*vault
+**/*secret.yml
+**/*secret.yaml
+**/*secrets.yml
+**/*secrets.yaml
+secrets/
+!secrets/README.md
+
+# SOPS decrypted files
+*.dec
+**/*.decrypted
+*.plain.yaml
+*.plain.yml
+
+# =========================
+# SSH / credentials
+# =========================
+*.pem
+*.key
+*.pub
+id_rsa
+id_ed25519
+known_hosts
+
+# =========================
+# Ansible Galaxy / Collections
+# =========================
+collections/
+roles/
+!.gitkeep
+
+# If you vendor Galaxy dependencies instead, remove the above
+# and commit roles/collections explicitly.
+
+# =========================
+# Molecule
+# =========================
+.molecule/
+.cache/
+.pytest_cache/
+__pycache__/
+*.pyc
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+
+# =========================
+# Editor / OS files
+# =========================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+#
