@@ -1,3 +1,4 @@
+---
 - name: Proxmox shutdown nodes
   hosts: proxmox
   gather_facts: true

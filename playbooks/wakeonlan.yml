@@ -1,3 +1,4 @@
+---
 - name: Proxmox Wake-on-LAN
   hosts: proxmox
   gather_facts: false

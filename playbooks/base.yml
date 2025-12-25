@@ -1,3 +1,4 @@
+---
 - name: Proxmox base configuration
   hosts: proxmox
   gather_facts: true
@@ -5,7 +6,7 @@
 
   pre_tasks:
     - name: Run optional backup role
-      include_role:
+      ansible.builtin.include_role:
         name: "{{ extra_role }}"
       when: extra_role is defined
 

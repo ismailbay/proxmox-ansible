@@ -1,3 +1,4 @@
+---
 creation_rules:
   - path_regex: inventory/.+\.sops\.ya?ml
     age: age15wr79l0v753jpsz0fas0xnavwqucc4sglq4mdx8dssct5g97md6qeslr6r
