@@ -1,0 +1,72 @@
+---
+- name: Power on nodes
+  hosts: proxmox
+  gather_facts: false
+  tags: never, power
+
+  tasks:
+    - name: Power on by WoL (Poor man's IPMI)
+      community.general.wakeonlan:
+        mac: "{{ mgmt_mac_address }}"
+        broadcast: 192.168.1.255
+      delegate_to: localhost
+      when: "power_on | default(false) | bool"
+
+    - name: Wait for SSH to become available
+      ansible.builtin.wait_for:
+        host: "{{ ansible_host }}"
+        port: 22
+        delay: 10
+        timeout: 120
+      when: "power_on | default(false) | bool"
+      delegate_to: localhost
+
+- name: Power off nodes
+  hosts: proxmox
+  tags: never, power
+  tasks:
+    - name: Shut down the machine with all defaults
+      community.general.shutdown:
+        delay: 5
+      when: "power_off | default(false) | bool"
+
+- name: Backup /etc of nodes
+  hosts: proxmox
+  tags: never, backup
+  tasks:
+    - name: Compress /etc directory on remote system
+      community.general.archive:
+        path: /etc
+        dest: /tmp/etc_backup.tar.gz
+        format: gz
+        mode: "0600"
+
+    - name: Ensure local directory exists
+      ansible.builtin.file:
+        path: "{{ backup_dir }}"
+        state: directory
+        mode: "0750"
+      delegate_to: localhost
+
+    - name: Fetch the backup to local system
+      ansible.builtin.fetch:
+        src: /tmp/etc_backup.tar.gz
+        dest: "{{ backup_dir }}/{{ inventory_hostname }}_{{ ansible_facts['date_time'].iso8601 }}.tar.gz"
+        flat: true
+
+    - name: Remove the temporary backup file from remote system
+      ansible.builtin.file:
+        path: /tmp/etc_backup.tar.gz
+        state: absent
+
+- name: System upgrade
+  hosts: proxmox
+  tags: upgrade_system
+  tasks:
+    - name: Dist upgrade
+      ansible.builtin.apt:
+        update_cache: true
+        install_recommends: false
+        autoremove: true
+        upgrade: dist
+      when: "upgrade_system | default(false) | bool"

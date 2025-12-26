@@ -1,0 +1,14 @@
+---
+- name: Welcome playbook
+  hosts: proxmox
+  tasks:
+    - name: Ping nodes
+      ansible.builtin.ping:
+
+# TODO:
+# - name: Common
+# - name: User management
+# - name: Base Proxmox configuration
+# - name: RTL8125 dkms install
+# - name: Hostname management
+# - name: Network configuration
