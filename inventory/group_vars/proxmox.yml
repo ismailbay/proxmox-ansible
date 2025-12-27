@@ -9,7 +9,6 @@ proxmox:
 
   base_packages:
     - vim
-    - curl
     - htop
-    - ca-certificates
-    - gnupg
+    - git
+    - fastfetch

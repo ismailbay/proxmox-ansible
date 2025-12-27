@@ -47,7 +47,7 @@ known_hosts
 # Ansible Galaxy / Collections
 # =========================
 collections/
-roles/
+galaxy_roles/
 !.gitkeep
 
 # If you vendor Galaxy dependencies instead, remove the above

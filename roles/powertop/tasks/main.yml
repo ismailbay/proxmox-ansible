@@ -1,0 +1,31 @@
+---
+- name: Install powertop
+  ansible.builtin.package:
+    name: powertop
+    state: present
+
+- name: Install powertop systemd service
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/powertop.service
+    mode: "0644"
+    content: |
+      [Unit]
+      Description=Powertop tunings
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/sbin/powertop --auto-tune
+
+      [Install]
+      WantedBy=multi-user.target
+  notify: Reload systemd
+
+- name: Enable and start powertop service
+  ansible.builtin.systemd:
+    name: powertop
+    enabled: true
+    state: stopped # oneshot service
+
+- name: Run powertop tuning now
+  ansible.builtin.command: /usr/sbin/powertop --auto-tune
+  changed_when: false

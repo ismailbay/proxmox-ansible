@@ -1,0 +1,35 @@
+---
+- name: Remove enterprise repositories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/apt/sources.list.d/pve-enterprise.sources
+    - /etc/apt/sources.list.d/ceph.sources
+
+- name: Add no-subscription repository
+  ansible.builtin.template:
+    src: pve-no-subscription.sources.j2
+    dest: "/etc/apt/sources.list.d/pve-no-subscription.sources"
+    owner: root
+    group: root
+    mode: "0644"
+  # notify: Update package sources
+
+- name: Disable Proxmox subscription nag
+  ansible.builtin.template:
+    src: pve-remove-nag.sh.j2
+    dest: "/usr/local/bin/pve-remove-nag.sh"
+    owner: root
+    group: root
+    mode: "755"
+
+- name: Create updater for Proxmox subscription nag
+  ansible.builtin.copy:
+    dest: /etc/apt/apt.conf.d/no-nag-script
+    content: |
+      DPkg::Post-Invoke { "/usr/local/bin/pve-remove-nag.sh"; };
+    owner: root
+    group: root
+    mode: "0644"
+  become: true

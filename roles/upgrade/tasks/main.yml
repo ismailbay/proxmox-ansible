@@ -1,0 +1,7 @@
+---
+- name: Dist upgrade
+  ansible.builtin.apt:
+    update_cache: true
+    install_recommends: false
+    autoremove: true
+    upgrade: dist
