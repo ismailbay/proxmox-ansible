@@ -33,31 +33,44 @@
 - name: Backup /etc of nodes
   hosts: proxmox
   tags: never, backup
+  # TODO: to many variables here, move them to group_vars and host_vars
+  #       retention, paths to include, backup path, ...
   tasks:
-    - name: Compress /etc directory on remote system
+    - name: Check if NFS is mounted
+      ansible.builtin.command: mountpoint -q /mnt/pve/proxmox
+      changed_when: false
+      failed_when: false
+      register: nfs_mount_check
+
+    - name: Check if NFS backup directory exists
+      ansible.builtin.stat:
+        path: "/mnt/pve/proxmox/host-backups/{{ hostname }}"
+      register: backup_dir_stat
+
+    - name: Compress /etc directory to NFS backup location
       community.general.archive:
         path: /etc
-        dest: /tmp/etc_backup.tar.gz
+        dest: "/mnt/pve/proxmox/host-backups/{{ hostname }}/etc_backup_{{ ansible_facts.date_time.iso8601 }}.tar.gz"
         format: gz
         mode: "0600"
+      when:
+        - backup_dir_stat.stat.exists
+        - nfs_mount_check.rc == 0
 
-    - name: Ensure local directory exists
+    - name: Find backups older than 10 days
+      ansible.builtin.find:
+        paths: "/mnt/pve/proxmox/host-backups/{{ hostname }}"
+        patterns: "etc_backup_*.tar.gz"
+        age: 14d
+        age_stamp: mtime
+      register: old_backups
+
+    - name: Remove backups older than 10 days
       ansible.builtin.file:
-        path: "{{ backup_dir }}"
-        state: directory
-        mode: "0750"
-      delegate_to: localhost
-
-    - name: Fetch the backup to local system
-      ansible.builtin.fetch:
-        src: /tmp/etc_backup.tar.gz
-        dest: "{{ backup_dir }}/{{ inventory_hostname }}_{{ ansible_facts['date_time'].iso8601 }}.tar.gz"
-        flat: true
-
-    - name: Remove the temporary backup file from remote system
-      ansible.builtin.file:
-        path: /tmp/etc_backup.tar.gz
+        path: "{{ item.path }}"
         state: absent
+      loop: "{{ old_backups.files }}"
+      when: old_backups.matched > 0
 
 - name: System upgrade
   hosts: proxmox

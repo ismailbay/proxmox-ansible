@@ -13,6 +13,7 @@
     - role: hostname
     - role: pve_repos
     - role: powersaving
+    - role: nfs_mounts
     - role: common
 
   handlers:

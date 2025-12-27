@@ -1,0 +1,25 @@
+---
+# small share to backup /etc, ...
+- name: Ensure NFS mount directory exists
+  ansible.builtin.file:
+    path: /mnt/pve/proxmox
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Mount Proxmox NFS share
+  ansible.posix.mount:
+    path: /mnt/pve/proxmox
+    src: 192.168.1.153:/mnt/ssd-pool/proxmox
+    fstype: nfs4
+    opts: _netdev,noatime,hard,timeo=600,retrans=5
+    state: mounted
+
+- name: Ensure host-backup directory exists
+  ansible.builtin.file:
+    path: /mnt/pve/proxmox/host-backups/{{ hostname }}
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
