@@ -15,6 +15,11 @@
     - role: powertop
     - role: common
 
+  handlers:
+    - name: Reboot nodes
+      ansible.builtin.reboot:
+        reboot_timeout: 120
+
 # TODO:
 # - name: User management
 # - name: Base Proxmox configuration

@@ -2,9 +2,18 @@
 - name: Set timezone
   community.general.timezone:
     name: "{{ proxmox.timezone }}"
+  notify: Reboot nodes
 
 - name: Install base packages
   ansible.builtin.apt:
     name: "{{ proxmox.base_packages }}"
     state: present
     update_cache: "true"
+
+- name: Dist upgrade
+  ansible.builtin.apt:
+    update_cache: true
+    install_recommends: false
+    autoremove: true
+    upgrade: dist
+  notify: Reboot nodes

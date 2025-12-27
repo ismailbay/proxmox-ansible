@@ -6,6 +6,7 @@
   loop:
     - /etc/apt/sources.list.d/pve-enterprise.sources
     - /etc/apt/sources.list.d/ceph.sources
+  notify: Reboot nodes
 
 - name: Add no-subscription repository
   ansible.builtin.template:
@@ -14,7 +15,7 @@
     owner: root
     group: root
     mode: "0644"
-  # notify: Update package sources
+  notify: Reboot nodes
 
 - name: Disable Proxmox subscription nag
   ansible.builtin.template:
