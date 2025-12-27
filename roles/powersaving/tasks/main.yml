@@ -1,4 +1,25 @@
 ---
+- name: Install cpupowersave systemd service
+  ansible.builtin.template:
+    src: cpupowersave.service.j2
+    dest: /etc/systemd/system/cpupowersave.service
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Reload systemd
+
+- name: Set CPU scaling governor to powersave immediately
+  ansible.builtin.command: >
+    bash -c 'echo powersave | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+  become: true
+  changed_when: false
+
+- name: Enable and start cpupowersave service
+  ansible.builtin.systemd:
+    name: cpupowersave
+    enabled: true
+    state: stopped
+
 - name: Install powertop
   ansible.builtin.package:
     name: powertop

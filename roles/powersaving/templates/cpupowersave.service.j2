@@ -1,0 +1,10 @@
+[Unit]
+Description=Set CPU scaling governor to powersave
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'echo powersave | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+
+[Install]
+WantedBy=multi-user.target
