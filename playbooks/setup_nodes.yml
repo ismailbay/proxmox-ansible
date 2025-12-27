@@ -1,19 +1,21 @@
 ---
 - name: Welcome playbook
   hosts: proxmox
+  become: true
   tasks:
     - name: Ping nodes
       ansible.builtin.ping:
 
-- name: Common tasks
+- name: Configure base node settings
   hosts: proxmox
+  become: true
   roles:
-    - role: powertop
+    - role: hostname
     - role: pve_repos
+    - role: powertop
     - role: common
 
 # TODO:
 # - name: User management
 # - name: Base Proxmox configuration
-# - name: Hostname management
 # - name: Network configuration
