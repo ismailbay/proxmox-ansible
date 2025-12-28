@@ -1,0 +1,7 @@
+---
+opentofu:
+  user: opentofu@pve
+  role: OpenTofuProvisioner
+  token_id: opentofu
+  comment: OpenTofu provisioning token
+  token_path: ./../../opentofu-tokens

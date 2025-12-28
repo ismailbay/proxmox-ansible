@@ -13,7 +13,7 @@
     path: /mnt/pve/proxmox
     src: 192.168.1.153:/mnt/ssd-pool/proxmox
     fstype: nfs4
-    opts: _netdev,noatime,hard,timeo=600,retrans=5
+    opts: _netdev,noatime,hard,timeo=600,retrans=5,x-systemd.automount
     state: mounted
 
 - name: Ensure host-backup directory exists

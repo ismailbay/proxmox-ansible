@@ -15,13 +15,9 @@
     - role: powersaving
     - role: nfs_mounts
     - role: common
+    - role: access
 
   handlers:
     - name: Reboot nodes
       ansible.builtin.reboot:
         reboot_timeout: 120
-
-# TODO:
-# - name: User management
-# - name: Base Proxmox configuration
-# - name: Network configuration

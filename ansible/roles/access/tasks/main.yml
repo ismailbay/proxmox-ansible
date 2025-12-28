@@ -1,0 +1,64 @@
+---
+- name: Check existing roles
+  ansible.builtin.command: pveum role list
+  register: pve_roles
+  changed_when: false
+
+- name: Create OpenTofu role
+  ansible.builtin.command: >
+    pveum role add {{ opentofu.role }}
+    -privs "VM.Allocate VM.Audit VM.Clone
+            VM.Config.CPU VM.Config.Disk VM.Config.Memory
+            VM.Config.Network VM.Config.Options
+            VM.Migrate VM.Monitor VM.PowerMgmt
+            Datastore.Allocate Datastore.AllocateSpace Datastore.Audit
+            SDN.Use"
+  changed_when: false
+  when: opentofu.role not in pve_roles.stdout
+
+- name: Check existing users
+  ansible.builtin.command: pveum user list
+  register: pve_users
+  changed_when: false
+
+- name: Create OpenTofu user
+  ansible.builtin.command: >
+    pveum user add {{ opentofu.user }}
+    --comment "{{ opentofu.comment }}"
+  changed_when: false
+  when: opentofu.user not in pve_users.stdout
+
+- name: Assign OpenTofu role to user
+  ansible.builtin.command: >
+    pveum acl modify /
+    -user {{ opentofu.user }}
+    -role {{ opentofu.role }}
+  changed_when: false
+  # when: opentofu.user not in pve_acls.stdout
+
+- name: Check existing API tokens
+  ansible.builtin.command: >
+    pveum user token list {{ opentofu.user }}
+  register: pve_tokens
+  changed_when: false
+  failed_when: false
+
+- name: Ensure local token directory exists
+  become: false
+  ansible.builtin.file:
+    path: "{{ opentofu.token_path }}"
+    state: directory
+    mode: "0700"
+  delegate_to: localhost
+
+- name: Create OpenTofu API token
+  ansible.builtin.command: >
+    pveum user token add {{ opentofu.user }}
+    {{ opentofu.token_id }}
+    --privsep 1
+    --comment "{{ opentofu.comment }}"
+    --output-format json
+  register: token_create
+  changed_when: "'already exists' not in token_create.stdout"
+  notify: Store OpenTofu API token on localhost
+  when: opentofu.token_id not in pve_tokens.stdout

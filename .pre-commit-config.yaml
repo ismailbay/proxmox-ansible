@@ -20,6 +20,10 @@ repos:
     rev: v25.12.2
     hooks:
       - id: ansible-lint
+        name: ansible-lint
+        entry: bash -c "cd ansible && ansible-lint"
+        # language: system
+        types: [yaml]
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.11.0.1
     hooks:

@@ -57,7 +57,7 @@
         - backup_dir_stat.stat.exists
         - nfs_mount_check.rc == 0
 
-    - name: Find backups older than 10 days
+    - name: Find backups older than 14 days
       ansible.builtin.find:
         paths: "/mnt/pve/proxmox/host-backups/{{ hostname }}"
         patterns: "etc_backup_*.tar.gz"

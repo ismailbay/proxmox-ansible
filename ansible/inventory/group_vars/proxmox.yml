@@ -2,7 +2,6 @@
 ansible_python_interpreter: /usr/bin/python3
 
 upgrade_system: false
-backup_dir: "{{ lookup('env', 'HOME') }}/Downloads/proxmox_backups/"
 
 proxmox:
   timezone: Europe/Vienna

@@ -1,0 +1,9 @@
+---
+# roles/access/handlers/main.yml
+- name: Store OpenTofu API token on localhost
+  become: false
+  ansible.builtin.copy:
+    dest: "{{ opentofu.token_path }}/{{ inventory_hostname }}.token"
+    content: "{{ (token_create.stdout | from_json).value }}"
+    mode: "0600"
+  delegate_to: localhost
