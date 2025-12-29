@@ -1,5 +1,4 @@
 ---
 hostname: pve3
 hostname_fqdn: pve3.ibay.dev
-
 mgmt_mac_address: e8:6a:64:a4:6f:e0
