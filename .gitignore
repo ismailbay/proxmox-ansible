@@ -30,7 +30,7 @@ opentofu-tokens
 
 # SOPS decrypted files
 *.dec
-**/*.decrypted
+**/*.decrypted*
 *.plain.yaml
 *.plain.yml
 
