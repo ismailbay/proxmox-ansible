@@ -10,9 +10,9 @@
     -privs "VM.Allocate VM.Audit VM.Clone
             VM.Config.CPU VM.Config.Disk VM.Config.Memory
             VM.Config.Network VM.Config.Options
-            VM.Migrate VM.Monitor VM.PowerMgmt
+            VM.Migrate VM.PowerMgmt
             Datastore.Allocate Datastore.AllocateSpace Datastore.Audit
-            SDN.Use"
+            SDN.Use Sys.Modify"
   changed_when: false
   when: opentofu.role not in pve_roles.stdout
 

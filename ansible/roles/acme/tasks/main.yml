@@ -1,0 +1,88 @@
+---
+- name: "Install pexpect for expect module"
+  ansible.builtin.apt:
+    name: python3-pexpect
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Check if ACME account is registered
+  ansible.builtin.command: pvenode acme account list
+  register: acme_accounts
+  changed_when: false
+  failed_when: false
+
+- name: Register ACME account with Let's Encrypt
+  ansible.builtin.expect:
+    command: >
+      pvenode acme account register {{ acme.name }}
+      {{ acme.contact_secret }}
+      --directory {{ acme.directory }}
+    responses:
+      "Do you agree to the above terms.*": "y"
+    timeout: 30
+  when: acme.name not in acme_accounts.stdout
+  register: acme_register
+
+- name: Create Cloudflare DNS plugin configuration
+  ansible.builtin.copy:
+    dest: /root/.cloudflare_creds
+    content: |
+      CF_Token={{ acme.dns.cf_token_secret }}
+      CF_Account_ID={{ acme.dns.cf_account_id_secret | default('') }}
+      CF_Zone_ID={{ acme.dns.cf_zone_id_secret | default('') }}
+    mode: '0600'
+    owner: root
+    group: root
+  when: acme.dns.cf_token_secret is defined
+
+- name: Check if DNS plugin is configured
+  ansible.builtin.command: pvenode acme plugin list
+  register: acme_plugins
+  changed_when: false
+  failed_when: false
+
+- name: Add Cloudflare DNS plugin
+  ansible.builtin.command: >
+    pvenode acme plugin add dns {{ plugin }}
+    --api cf
+    --data /root/.cloudflare_creds
+  changed_when: true
+  when:
+    - acme.dns.cf_token_secret is defined
+    - acme.dns.plugin not in acme_plugins.stdout
+  register: plugin_add
+
+- name: Check if ACME domain is configured
+  ansible.builtin.command: pvenode config get
+  register: acme_config
+  changed_when: false
+  failed_when: false
+
+- name: Set account to use for certificate
+  ansible.builtin.command: >
+    pvenode config set --acme account={{ account }}
+  register: set_account
+  changed_when: true
+  when: acme.name not in acme_config.stdout
+
+- name: Set node domain for certificate
+  ansible.builtin.command: >
+    pvenode config set -acmedomain0 {{ hostname_fqdn }},plugin={{ acme.dns.plugin }}
+  register: set_domain
+  changed_when: true
+  when: hostname_fqdn not in acme_config.stdout
+
+- name: Order certificate for node
+  ansible.builtin.command: pvenode acme cert order
+  register: cert_order
+  changed_when: "'Certificate successfully installed' in cert_order.stdout"
+  failed_when:
+    - cert_order.rc != 0
+    - "'certificate exists' not in cert_order.stderr"
+  notify: Restart pveproxy
+
+- name: Verify certificate installation
+  ansible.builtin.stat:
+    path: /etc/pve/local/pveproxy-ssl.pem
+  register: cert_file

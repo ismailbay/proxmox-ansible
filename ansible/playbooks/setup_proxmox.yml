@@ -1,11 +1,4 @@
 ---
-- name: Welcome playbook
-  hosts: proxmox
-  become: true
-  tasks:
-    - name: Ping nodes
-      ansible.builtin.ping:
-
 - name: Configure base node settings
   hosts: proxmox
   become: true
@@ -16,8 +9,14 @@
     - role: nfs_mounts
     - role: common
     - role: access
+    - role: acme
 
   handlers:
     - name: Reboot nodes
       ansible.builtin.reboot:
         reboot_timeout: 120
+
+    - name: Restart pveproxy
+      ansible.builtin.service:
+        name: "pveproxy"
+        state: "restarted"
