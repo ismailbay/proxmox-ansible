@@ -33,8 +33,6 @@
 - name: Backup /etc of nodes
   hosts: proxmox
   tags: never, backup
-  # TODO: to many variables here, move them to group_vars and host_vars
-  #       retention, paths to include, backup path, ...
   tasks:
     - name: Check if NFS is mounted
       ansible.builtin.command: mountpoint -q /mnt/pve/proxmox
@@ -65,7 +63,7 @@
         age_stamp: mtime
       register: old_backups
 
-    - name: Remove backups older than 10 days
+    - name: Remove backups older than 14 days
       ansible.builtin.file:
         path: "{{ item.path }}"
         state: absent

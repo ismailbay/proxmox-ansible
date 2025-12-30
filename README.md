@@ -21,7 +21,7 @@ Manage Proxmox nodes with Ansible, avoiding ClickOps and learn Ansible by workin
 Execute the playbooks:
 
 ```bash
-ansible-playbook playbooks/setup_nodes.yml
+ansible-playbook playbooks/setup_proxmox.yml
 ansible-playbook playbooks/lxc.yml
 ansible-playbook playbooks/....yml
 ```
