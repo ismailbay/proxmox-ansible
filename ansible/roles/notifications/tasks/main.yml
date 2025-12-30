@@ -1,0 +1,25 @@
+---
+- name: Ensure Gotify notification target exists
+  ansible.builtin.command: |
+    pvesh create /cluster/notifications/endpoints/gotify \
+    --name gotify-pve \
+    --server {{ gotify.server }} \
+    --token {{ gotify.token_secret }} \
+    --comment "Gotify alerts for {{ hostname }}"
+  register: gotify_target_result
+  failed_when:
+    - gotify_target_result.rc != 0
+    - "'already exists' not in gotify_target_result.stderr"
+  changed_when: gotify_target_result.rc == 0
+
+- name: Create a notification matcher for all events
+  ansible.builtin.shell: |
+    pvesh create /cluster/notifications/matchers  \
+    --name gotify-default-matcher \
+    --target gotify-pve \
+    --comment "Route all alerts for {{ hostname }} to Gotify"
+  register: matcher_result
+  failed_when:
+    - matcher_result.rc != 0
+    - "'already exists' not in matcher_result.stderr"
+  changed_when: matcher_result.rc == 0

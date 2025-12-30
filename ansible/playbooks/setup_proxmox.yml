@@ -10,6 +10,7 @@
     - role: common
     - role: access
     - role: acme
+    - role: notifications
 
   handlers:
     - name: Reboot nodes

@@ -47,7 +47,7 @@
 
     - name: Compress /etc directory to NFS backup location
       community.general.archive:
-        path: /etc
+        path: /etc/pve
         dest: "/mnt/pve/proxmox/host-backups/{{ hostname }}/etc_backup_{{ ansible_facts.date_time.iso8601 }}.tar.gz"
         format: gz
         mode: "0600"
