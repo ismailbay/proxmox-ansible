@@ -11,6 +11,7 @@
     - role: access
     - role: acme
     - role: notifications
+    - role: metrics
 
   handlers:
     - name: Reboot nodes

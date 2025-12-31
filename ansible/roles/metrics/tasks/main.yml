@@ -1,0 +1,19 @@
+---
+- name: Check if OTEL metrics server is already configured
+  ansible.builtin.command: "pvesh get /cluster/metrics/server/{{ metrics_server.name }}"
+  register: metrics_check
+  failed_when: false
+  changed_when: false
+
+- name: Configure OpenTelemetry metrics server
+  ansible.builtin.command: >
+    pvesh create /cluster/metrics/server/{{ metrics_server.name }}
+    --server {{ metrics_server.host }}
+    --port {{ metrics_server.port }}
+    --type opentelemetry
+    --otel-protocol http
+    --otel-verify-ssl false
+  when: metrics_check.rc != 0
+  register: metrics_create
+  changed_when: metrics_create.rc == 0
+  failed_when: metrics_create.rc != 0
