@@ -2,3 +2,6 @@
 hostname: pve3
 hostname_fqdn: pve3.ibay.dev
 mgmt_mac_address: e8:6a:64:a4:6f:e0
+nvme_storage:
+  device: "/dev/disk/by-id/nvme-Samsung_SSD_980_1TB_S649NL0TA86516F"
+  name: "k8s-nvme"

@@ -12,6 +12,7 @@
     - role: acme
     - role: notifications
     - role: metrics
+    - role: storage
 
   handlers:
     - name: Reboot nodes

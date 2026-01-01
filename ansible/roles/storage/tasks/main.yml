@@ -1,0 +1,44 @@
+---
+- name: Verify device exists
+  ansible.builtin.stat:
+    path: "{{ nvme_storage.device }}"
+  register: device_stat
+
+- name: Fail if device is missing
+  ansible.builtin.fail:
+    msg: "Device {{ nvme_storage.device }} not found on {{ inventory_hostname }}!"
+  when: not device_stat.stat.exists
+
+- name: Check if volume group exists '{{ nvme_storage.name }}'
+  ansible.builtin.command: >
+    vgs {{ nvme_storage.name }}
+  register: vg_result
+  failed_when: false
+  changed_when: false
+  when: device_stat.stat.exists
+
+- name: Prepare nvme device
+  when:
+    - device_stat.stat.exists
+    - vg_result.rc != 0
+  block:
+    - name: Wipe the nvme device
+      ansible.builtin.command: >
+        wipefs -a {{ nvme_storage.device }}
+      register: result
+      changed_when: result.rc == 0
+    - name: Create a new partition table
+      ansible.builtin.command: >
+        sgdisk -Z {{ nvme_storage.device }}
+      register: result
+      changed_when: result.rc == 0
+    - name: Create LVM Physical Volume
+      ansible.builtin.command: >
+        pvcreate {{ nvme_storage.device }}
+      register: result
+      changed_when: result.rc == 0
+    - name: Create LVM Volume Group
+      ansible.builtin.command: >
+        vgcreate {{ nvme_storage.name }} {{ nvme_storage.device }}
+      register: result
+      changed_when: result.rc == 0

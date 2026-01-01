@@ -11,6 +11,9 @@ proxmox:
     - htop
     - git
     - fastfetch
+    - nvme-cli
+    - smartmontools
+    - hdparm
 
 metrics_server:
   # otel collector on pve-rack1, pushed to victoriametrics on pve-rack1
