@@ -60,5 +60,5 @@
     --output-format json
   register: token_create
   changed_when: "'already exists' not in token_create.stdout"
-  notify: Store OpenTofu API token on localhost
   when: opentofu.token_id not in pve_tokens.stdout
+  notify: Store OpenTofu API token on localhost
