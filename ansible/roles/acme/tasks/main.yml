@@ -11,6 +11,7 @@
   register: acme_accounts
   changed_when: false
   failed_when: false
+  run_once: true
 
 - name: Register ACME account with Let's Encrypt
   ansible.builtin.expect:
@@ -23,6 +24,7 @@
     timeout: 30
   when: acme.name not in acme_accounts.stdout
   register: acme_register
+  run_once: true
 
 - name: Create Cloudflare DNS plugin configuration
   ansible.builtin.copy:
@@ -35,12 +37,14 @@
     owner: root
     group: root
   when: acme.dns.cf_token_secret is defined
+  run_once: true
 
 - name: Check if DNS plugin is configured
   ansible.builtin.command: pvenode acme plugin list
   register: acme_plugins
   changed_when: false
   failed_when: false
+  run_once: true
 
 - name: Add Cloudflare DNS plugin
   ansible.builtin.command: >
@@ -52,6 +56,7 @@
     - acme.dns.cf_token_secret is defined
     - acme.dns.plugin not in acme_plugins.stdout
   register: plugin_add
+  run_once: true
 
 - name: Check if ACME domain is configured
   ansible.builtin.command: pvenode config get
@@ -80,7 +85,6 @@
   failed_when:
     - cert_order.rc != 0
     - "'certificate exists' not in cert_order.stderr"
-  notify: Restart pveproxy
 
 - name: Verify certificate installation
   ansible.builtin.stat:

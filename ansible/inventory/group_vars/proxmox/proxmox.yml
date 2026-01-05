@@ -4,6 +4,9 @@ ansible_python_interpreter: /usr/bin/python3
 upgrade_system: false
 
 proxmox:
+  cluster_name: pve-homelab
+  initial_node: pve-rack
+
   timezone: Europe/Vienna
 
   base_packages:

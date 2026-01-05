@@ -3,7 +3,8 @@
 - name: Store OpenTofu API token on localhost
   become: false
   ansible.builtin.copy:
-    dest: "{{ opentofu.token_path }}/{{ inventory_hostname }}.token"
-    content: "{{ (token_create.stdout | from_json).value }}"
+    dest: "{{ opentofu.token_path }}/ {{ opentofu.token_id }}.token"
+    # format for bpg/proxmox provider
+    content: "{{ opentofu.user }}!{{ opentofu.token_id }}={{ (token_create.stdout | from_json).value }}"
     mode: "0600"
   delegate_to: localhost

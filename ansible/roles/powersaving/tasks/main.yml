@@ -1,24 +1,26 @@
 ---
-- name: Install cpupowersave systemd service
-  ansible.builtin.template:
-    src: cpupowersave.service.j2
-    dest: /etc/systemd/system/cpupowersave.service
-    owner: root
-    group: root
+- name: Install CPU scaling governor systemd service
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/cpu_scaling_governor.service
     mode: "0644"
+    content: |
+      [Unit]
+      Description=Set CPU scaling governor to powersave
+      After=multi-user.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/bin/bash -c 'echo powersave | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+
+      [Install]
+      WantedBy=multi-user.target
   notify: Reload systemd
 
-- name: Set CPU scaling governor to powersave immediately
-  ansible.builtin.command: >
-    bash -c 'echo powersave | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
-  become: true
-  changed_when: false
-
-- name: Enable and start cpupowersave service
+- name: Enable and start powertop service
   ansible.builtin.systemd:
-    name: cpupowersave
+    name: cpu_scaling_governor
     enabled: true
-    state: stopped
+    state: stopped # oneshot service
 
 - name: Install powertop
   ansible.builtin.package:

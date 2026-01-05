@@ -1,0 +1,62 @@
+---
+- name: Verify passwordless SSH from pve-rack node to other nodes
+  ansible.builtin.shell: >
+    ssh -o BatchMode=yes -o ConnectTimeout=5
+    -o StrictHostKeyChecking=no
+    {{ hostvars[item].ansible_host }} "hostname"
+  register: ssh_test
+  delegate_to: "{{ proxmox.initial_node }}"
+  loop: "{{ groups['proxmox_mini'] }}"
+  when: inventory_hostname == proxmox.initial_node
+  changed_when: false
+
+- name: Fail if SSH check failed
+  ansible.builtin.fail:
+    msg: "SSH connectivity from {{ proxmox.initial_node }} to {{ item.item }} failed!"
+  when:
+    - inventory_hostname == proxmox.initial_node
+    - item.rc != 0
+  loop: "{{ ssh_test.results }}"
+
+- name: Check if node is already part of a cluster
+  ansible.builtin.command: >
+    pvecm status
+  register: cluster_status
+  failed_when: false
+  changed_when: false
+
+- name: Initialize Proxmox cluster on pve-rack node
+  ansible.builtin.command: >
+    pvecm create {{ proxmox.cluster_name }}
+  register: cluster_create
+  when:
+    - inventory_hostname == proxmox.initial_node
+    - cluster_status.rc != 0
+  changed_when: cluster_create.rc == 0
+  failed_when: cluster_create.rc != 0
+  run_once: true
+
+- name: Join other nodes into the cluster
+  when:
+    - inventory_hostname != proxmox.initial_node
+    - cluster_status.rc != 0
+  block:
+    - name: Get Cluster certificate fingerprint from pve-rack
+      ansible.builtin.shell:
+        cmd: |
+          set -o pipefail
+          openssl x509 -in /etc/pve/pve-root-ca.pem -noout -fingerprint -sha256 | cut -d "=" -f 2
+        executable: /bin/bash
+      register: pve_fingerprint
+      delegate_to: "{{ proxmox.initial_node }}"
+      changed_when: false
+
+    - name: Join pve-mini nodes using Fingerprint
+      ansible.builtin.command: >
+        pvecm add {{ hostvars[proxmox.initial_node].ansible_host }}
+        --fingerprint {{ pve_fingerprint.stdout }}
+        --use_ssh
+      register: join_output
+      async: 90
+      poll: 5
+      changed_when: false

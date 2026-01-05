@@ -26,7 +26,7 @@ host_vars/*vault*
 **/*secrets.yaml
 secrets/
 !secrets/README.md
-opentofu-tokens
+api-tokens
 
 # SOPS decrypted files
 *.dec

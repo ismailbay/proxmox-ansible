@@ -8,11 +8,30 @@
     - role: powersaving
     - role: nfs_mounts
     - role: common
+    # - role: cluster # flacky
     - role: access
+      run_once: true
     - role: acme
     - role: notifications
+      run_once: true
     - role: metrics
-    - role: storage
+      run_once: true
+
+  handlers:
+    - name: Reboot nodes
+      ansible.builtin.reboot:
+        reboot_timeout: 120
+
+    - name: Restart pveproxy
+      ansible.builtin.service:
+        name: "pveproxy"
+        state: "restarted"
+
+- name: Configure mini node settings
+  hosts: proxmox_mini
+  become: true
+  roles:
+    - role: nvme
 
   handlers:
     - name: Reboot nodes
