@@ -81,4 +81,16 @@ Thumbs.db
 *.swo
 *~
 
+# =========================
+# Terraform/OpenTofu
+# =========================
+**/.terraform/
+**/.terraform.lock.hcl
+**/*.tfstate*
+**/*.backup
+# ignore all
+**/*.tfvars*
+# do not ignore if encrypted
+!**/*.tfvars.enc.y*ml
+
 #
