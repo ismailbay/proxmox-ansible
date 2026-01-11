@@ -4,7 +4,7 @@ terraform {
   required_providers {
     proxmox = {
       source  = "bpg/proxmox"
-      version = "0.91"
+      version = "0.92"
     }
     sops = {
       source  = "carlpett/sops"
@@ -25,7 +25,7 @@ provider "proxmox" {
   endpoint  = data.sops_file.secrets.data["proxmox.endpoint"]
   api_token = data.sops_file.secrets.data["proxmox.api_token"]
   ssh {
-    agent = false
+    agent       = false
     private_key = file("~/.ssh/id_ansible_pve.pub") # TODO: create new keys
   }
 }

@@ -1,890 +1,16 @@
-# __generated__ by OpenTofu from "pve-rack/104"
-resource "proxmox_virtual_environment_container" "authelia" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Authelia LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["215"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 2
-  }
-  initialization {
-    hostname = "authelia"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 512
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:1B:6C:6F"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/106"
-resource "proxmox_virtual_environment_container" "mqtt" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>MQTT LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["142", "mqtt"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 2
-  }
-  initialization {
-    hostname = "mqtt"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 512
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:DF:83:7F"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/117"
-resource "proxmox_virtual_environment_container" "proxmox-datacenter-manager" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Proxmox-Datacenter-Manager LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["185", "community-script", "datacenter"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  cpu {
-    architecture = "amd64"
-    cores        = 2
-    units        = 1024
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 10
-  }
-  initialization {
-    hostname = "proxmox-datacenter-manager"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 2048
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:19:63:75"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/115"
-resource "proxmox_virtual_environment_container" "grafana" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Alpine-Grafana LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["135", "community-script", "observability"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 4
-  }
-  initialization {
-    hostname = "grafana"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 512
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:78:7B:D4"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "alpine"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/111"
-resource "proxmox_virtual_environment_container" "postgresql" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>PostgreSQL LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = true
-  start_on_boot         = true
-  started               = true
-  tags                  = ["115", "database"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 8
-  }
-  initialization {
-    hostname = "postgresql"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 1024
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:4F:B3:76"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/110"
-resource "proxmox_virtual_environment_container" "netbird" {
-  description           = ""
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["220"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  cpu {
-    architecture = "amd64"
-    cores        = 2
-    units        = 1024
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 4
-  }
-  initialization {
-    hostname = "netbird"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 1024
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = true
-    mac_address = "BC:24:11:9F:45:3F"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/101"
-resource "proxmox_virtual_environment_container" "traefik" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Traefik LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["21"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 12
-  }
-  initialization {
-    hostname = "traefik"
-    ip_config {
-      ipv4 {
-        address = "192.168.1.21/24"
-        gateway = "192.168.1.1"
-      }
-    }
-  }
-  memory {
-    dedicated = 512
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:7D:66:23"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  startup {
-    down_delay = -1
-    order      = 2
-    up_delay   = -1
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/108"
-resource "proxmox_virtual_environment_container" "otelcollector" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Debian LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["221", "observability"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  cpu {
-    architecture = "amd64"
-    cores        = 2
-    units        = 1024
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 4
-  }
-  initialization {
-    hostname = "otelcollector"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 1024
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:13:67:98"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/102"
-resource "proxmox_virtual_environment_container" "gatus" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>gatus LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["230", "monitoring"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 8
-  }
-  initialization {
-    hostname = "gatus"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 1024
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:D0:C6:07"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/200"
-resource "proxmox_virtual_environment_container" "proxmox-backup-server" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Proxmox-Backup-Server LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["116", "backup", "community-script"]
-  template              = false
-  unprivileged          = false
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  cpu {
-    architecture = "amd64"
-    cores        = 2
-    units        = 1024
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 10
-  }
-  initialization {
-    hostname = "proxmox-backup-server"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 2048
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:3E:4B:EA"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/105"
-resource "proxmox_virtual_environment_container" "glance" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Glance LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["172", "dashboard"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 2
-  }
-  initialization {
-    hostname = "glance"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 512
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:AA:57:E4"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/107"
-resource "proxmox_virtual_environment_container" "gotify" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Gotify LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["201", "notification"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 2
-  }
-  initialization {
-    hostname = "gotify"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 512
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:77:B9:D1"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/114"
-resource "proxmox_virtual_environment_container" "victoriametrics" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>VictoriaMetrics LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = true
-  start_on_boot         = true
-  started               = true
-  tags                  = ["242", "observability"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  cpu {
-    architecture = "amd64"
-    cores        = 2
-    units        = 1024
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 16
-  }
-  initialization {
-    hostname = "victoriametrics"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 2048
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:93:AB:61"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-mini-1/113"
-resource "proxmox_virtual_environment_container" "unifi" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Unifi LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-mini-1"
-  pool_id               = null
-  protection            = true
-  start_on_boot         = true
-  started               = true
-  tags                  = ["173", "network", "unifi"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
-  cpu {
-    architecture = "amd64"
-    cores        = 2
-    units        = 1024
-  }
-  disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 8
-  }
-  initialization {
-    hostname = "unifi"
-    ip_config {
-      ipv4 {
-        address = "dhcp"
-        gateway = ""
-      }
-    }
-  }
-  memory {
-    dedicated = 2048
-    swap      = 512
-  }
-  network_interface {
-    bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
-    mac_address = "BC:24:11:10:67:76"
-    mtu         = 0
-    name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
-  }
-  operating_system {
-    template_file_id = ""
-    type             = "debian"
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
-  }
-}
-
-# __generated__ by OpenTofu from "pve-rack/100"
 resource "proxmox_virtual_environment_container" "pihole" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Pihole LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["20"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
+  vm_id        = 100
+  node_name    = "pve-rack"
+  tags         = ["core", "network"]
+  unprivileged = true
+
+  cpu {
+    cores = 2
+    units = 500 # > higher priority
   }
   disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 2
+    datastore_id = "local-lvm"
+    size         = 4
   }
   initialization {
     hostname = "pihole"
@@ -897,93 +23,578 @@ resource "proxmox_virtual_environment_container" "pihole" {
   }
   memory {
     dedicated = 1024
-    swap      = 512
+    swap      = 0
   }
   network_interface {
     bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
     mac_address = "BC:24:11:DD:5C:25"
-    mtu         = 0
     name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
   }
   operating_system {
     template_file_id = ""
     type             = "debian"
   }
   startup {
-    down_delay = -1
-    order      = 1
-    up_delay   = -1
-  }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
+    order = 1
   }
 }
 
-# __generated__ by OpenTofu from "pve-rack/103"
-resource "proxmox_virtual_environment_container" "cloudflare-ddns" {
-  description           = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Cloudflare-DDNS LXC</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>\n"
-  environment_variables = {}
-  hook_script_file_id   = null
-  node_name             = "pve-rack"
-  pool_id               = null
-  protection            = false
-  start_on_boot         = true
-  started               = true
-  tags                  = ["207"]
-  template              = false
-  unprivileged          = true
-  vm_id                 = null
-  console {
-    enabled   = true
-    tty_count = 2
-    type      = "tty"
-  }
+resource "proxmox_virtual_environment_container" "traefik" {
+  vm_id        = 101
+  node_name    = "pve-rack"
+  tags         = ["core", "network"]
+  unprivileged = true
+
   cpu {
-    architecture = "amd64"
-    cores        = 2
-    units        = 1024
+    cores = 2
+    units = 500
   }
   disk {
-    acl           = false
-    datastore_id  = "local-lvm"
-    mount_options = []
-    quota         = false
-    replicate     = false
-    size          = 3
+    datastore_id = "local-lvm"
+    size         = 12
+  }
+  initialization {
+    hostname = "traefik"
+    ip_config {
+      ipv4 {
+        address = "192.168.1.21/24"
+        gateway = "192.168.1.1"
+      }
+    }
+  }
+  memory {
+    dedicated = 1024
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:7D:66:23"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+  startup {
+    order = 2
+  }
+}
+
+resource "proxmox_virtual_environment_container" "gatus" {
+  vm_id        = 102
+  node_name    = "pve-rack"
+  tags         = ["observability"]
+  unprivileged = true
+
+  cpu {
+    cores = 1
+    units = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 8
+  }
+  initialization {
+    hostname = "gatus"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 1024
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:D0:C6:07"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "cloudflare-ddns" {
+  vm_id        = 103
+  node_name    = "pve-rack"
+  tags         = ["network"]
+  unprivileged = true
+
+  cpu {
+    architecture = "amd64"
+    cores        = 1
+    units        = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 3
   }
   initialization {
     hostname = "cloudflare-ddns"
     ip_config {
       ipv4 {
         address = "dhcp"
-        gateway = ""
       }
     }
   }
   memory {
     dedicated = 1024
-    swap      = 512
+    swap      = 0
   }
   network_interface {
     bridge      = "vmbr0"
-    enabled     = true
-    firewall    = false
     mac_address = "BC:24:11:B7:79:52"
-    mtu         = 0
     name        = "eth0"
-    rate_limit  = 0
-    vlan_id     = 0
   }
   operating_system {
     template_file_id = ""
     type             = "debian"
   }
-  lifecycle {
-    ignore_changes = [start_on_boot, timeout_clone, timeout_create, timeout_delete, timeout_start, timeout_update]
+}
+
+resource "proxmox_virtual_environment_container" "authelia" {
+  vm_id        = 104
+  node_name    = "pve-rack"
+  tags         = ["core"]
+  unprivileged = true
+
+  cpu {
+    cores = 1
+    units = 300 # > higher priority
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 2
+  }
+  initialization {
+    hostname = "authelia"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 512
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:1B:6C:6F"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "glance" {
+  vm_id        = 105
+  node_name    = "pve-rack"
+  unprivileged = true
+
+  cpu {
+    cores = 1
+    units = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 2
+  }
+  initialization {
+    hostname = "glance"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 1024
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:AA:57:E4"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "mqtt" {
+  vm_id        = 106
+  node_name    = "pve-rack"
+  tags         = ["database"]
+  unprivileged = true
+
+  cpu {
+    cores = 1
+    units = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 2
+  }
+  initialization {
+    hostname = "mqtt"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 512
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:DF:83:7F"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "gotify" {
+  vm_id        = 107
+  node_name    = "pve-rack"
+  tags         = ["observability"]
+  unprivileged = true
+
+  cpu {
+    cores = 1
+    units = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 2
+  }
+  initialization {
+    hostname = "gotify"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 512
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:77:B9:D1"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "otelcollector" {
+  vm_id        = 108
+  node_name    = "pve-rack"
+  tags         = ["observability"]
+  unprivileged = true
+
+  cpu {
+    cores = 2
+    units = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 4
+  }
+  initialization {
+    hostname = "otelcollector"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 1024
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:13:67:98"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "netbird" {
+  vm_id        = 110
+  node_name    = "pve-rack"
+  tags         = ["network"]
+  unprivileged = true
+
+  cpu {
+    cores = 2
+    units = 1024
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 4
+  }
+  initialization {
+    hostname = "netbird"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 1024
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:9F:45:3F"
+    name        = "eth0"
+    firewall    = true
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "postgresql" {
+  vm_id        = 111
+  node_name    = "pve-rack"
+  tags         = ["database"]
+  unprivileged = true
+
+  cpu {
+    cores = 1
+    units = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 8
+  }
+  initialization {
+    hostname = "postgresql"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 1024
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:4F:B3:76"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "unifi" {
+  vm_id        = 113
+  node_name    = "pve-mini-1"
+  tags         = ["network"]
+  unprivileged = true
+
+  cpu {
+    cores = 2
+    units = 1024
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 8
+  }
+  initialization {
+    hostname = "unifi"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 2048
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:10:67:76"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "victoriametrics" {
+  vm_id        = 114
+  node_name    = "pve-rack"
+  tags         = ["observability"]
+  unprivileged = true
+
+  cpu {
+    cores = 2
+    units = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 16
+  }
+  initialization {
+    hostname = "victoriametrics"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 2048
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:93:AB:61"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "grafana" {
+  vm_id        = 115
+  node_name    = "pve-rack"
+  tags         = ["observability"]
+  unprivileged = true
+
+  cpu {
+    cores = 2
+    units = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 4
+  }
+  initialization {
+    hostname = "grafana"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 1024
+    swap      = 0
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:78:7B:D4"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "alpine"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "proxmox-datacenter-manager" {
+  vm_id        = 117
+  node_name    = "pve-rack"
+  unprivileged = true
+  cpu {
+    architecture = "amd64"
+    cores        = 2
+    units        = 300
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 10
+  }
+  initialization {
+    hostname = "proxmox-datacenter-manager"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 2048
+    swap      = 512
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:19:63:75"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
+  }
+}
+
+resource "proxmox_virtual_environment_container" "proxmox-backup-server" {
+  vm_id        = 200
+  node_name    = "pve-rack"
+  tags         = ["backup", "core"]
+  unprivileged = false
+
+  cpu {
+    cores = 2
+    units = 100
+  }
+  disk {
+    datastore_id = "local-lvm"
+    size         = 10
+  }
+  initialization {
+    hostname = "proxmox-backup-server"
+    ip_config {
+      ipv4 {
+        address = "dhcp"
+      }
+    }
+  }
+  memory {
+    dedicated = 2048
+    swap      = 512
+  }
+  network_interface {
+    bridge      = "vmbr0"
+    mac_address = "BC:24:11:3E:4B:EA"
+    name        = "eth0"
+  }
+  operating_system {
+    template_file_id = ""
+    type             = "debian"
   }
 }
 
@@ -993,7 +604,6 @@ resource "proxmox_virtual_environment_vm" "truenas" {
   bios                                 = "seabios"
   boot_order                           = ["scsi0"]
   delete_unreferenced_disks_on_destroy = true
-  description                          = ""
   hook_script_file_id                  = null
   keyboard_layout                      = "en-us"
   kvm_arguments                        = ""
@@ -1101,7 +711,6 @@ resource "proxmox_virtual_environment_vm" "haos" {
   bios                                 = "ovmf"
   boot_order                           = ["scsi0"]
   delete_unreferenced_disks_on_destroy = true
-  description                          = "<div align='center'>\n  <a href='https://Helper-Scripts.com' target='_blank' rel='noopener noreferrer'>\n    <img src='https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>\n  </a>\n\n  <h2 style='font-size: 24px; margin: 20px 0;'>Homeassistant OS VM</h2>\n\n  <p style='margin: 16px 0;'>\n    <a href='https://ko-fi.com/community_scripts' target='_blank' rel='noopener noreferrer'>\n      <img src='https://img.shields.io/badge/&#x2615;-Buy us a coffee-blue' alt='spend Coffee' />\n    </a>\n  </p>\n\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-github fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-comments fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>\n  </span>\n  <span style='margin: 0 10px;'>\n    <i class=\"fa fa-exclamation-circle fa-fw\" style=\"color: #f5f5f5;\"></i>\n    <a href='https://github.com/community-scripts/ProxmoxVE/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>\n  </span>\n</div>"
   hook_script_file_id                  = null
   keyboard_layout                      = "en-us"
   kvm_arguments                        = ""
