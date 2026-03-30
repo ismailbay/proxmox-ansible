@@ -683,7 +683,6 @@ resource "proxmox_virtual_environment_vm" "truenas" {
   network_device {
     bridge       = "vmbr0"
     disconnected = false
-    enabled      = true
     firewall     = true
     mac_address  = "BC:24:11:21:66:B5"
     model        = "virtio"
@@ -779,7 +778,6 @@ resource "proxmox_virtual_environment_vm" "haos" {
   network_device {
     bridge       = "vmbr0"
     disconnected = false
-    enabled      = true
     firewall     = false
     mac_address  = "02:CB:48:0D:18:D5"
     model        = "virtio"
