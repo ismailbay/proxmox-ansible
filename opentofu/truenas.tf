@@ -101,3 +101,17 @@ resource "truenas_dataset" "apps" {
   path        = "apps"
   pool        = "ssd-pool"
 }
+
+module "truenas_apps" {
+  source = "./modules/truenas-app"
+  custom_apps = {
+    nginx = {
+      compose_config = <<-EOF
+        version: "3"
+        services:
+          web:
+            image: nginx
+        EOF
+    }
+  }
+}
