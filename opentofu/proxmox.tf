@@ -98,7 +98,8 @@ resource "proxmox_virtual_environment_container" "gatus" {
     hostname = "gatus"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.245/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -136,7 +137,8 @@ resource "proxmox_virtual_environment_container" "cloudflare-ddns" {
     hostname = "cloudflare-ddns"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.222/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -173,7 +175,8 @@ resource "proxmox_virtual_environment_container" "authelia" {
     hostname = "authelia"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.230/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -209,7 +212,8 @@ resource "proxmox_virtual_environment_container" "glance" {
     hostname = "glance"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.187/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -246,7 +250,8 @@ resource "proxmox_virtual_environment_container" "mqtt" {
     hostname = "mqtt"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.157/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -283,7 +288,8 @@ resource "proxmox_virtual_environment_container" "gotify" {
     hostname = "gotify"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.215/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -320,7 +326,8 @@ resource "proxmox_virtual_environment_container" "otelcollector" {
     hostname = "otelcollector"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.236/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -357,7 +364,8 @@ resource "proxmox_virtual_environment_container" "netbird" {
     hostname = "netbird"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.235/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -395,7 +403,8 @@ resource "proxmox_virtual_environment_container" "postgresql" {
     hostname = "postgresql"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.130/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -432,7 +441,8 @@ resource "proxmox_virtual_environment_container" "unifi" {
     hostname = "unifi"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.173/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -469,7 +479,8 @@ resource "proxmox_virtual_environment_container" "victoriametrics" {
     hostname = "victoriametrics"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.107/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -506,7 +517,8 @@ resource "proxmox_virtual_environment_container" "grafana" {
     hostname = "grafana"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.233/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -542,7 +554,8 @@ resource "proxmox_virtual_environment_container" "proxmox-datacenter-manager" {
     hostname = "proxmox-datacenter-manager"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.185/24"
+        gateway = "192.168.1.1"
       }
     }
   }
@@ -579,7 +592,8 @@ resource "proxmox_virtual_environment_container" "proxmox-backup-server" {
     hostname = "proxmox-backup-server"
     ip_config {
       ipv4 {
-        address = "dhcp"
+        address = "192.168.1.116/24"
+        gateway = "192.168.1.1"
       }
     }
   }
