@@ -111,6 +111,8 @@ module "truenas_apps" {
         services:
           web:
             image: nginx
+          web2:
+            image: nginx
         EOF
     }
   }
