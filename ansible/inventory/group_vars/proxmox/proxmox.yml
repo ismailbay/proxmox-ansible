@@ -17,6 +17,7 @@ proxmox:
     - nvme-cli
     - smartmontools
     - hdparm
+    - fio
 
 metrics_server:
   # otel collector on pve-rack1, pushed to victoriametrics on pve-rack1

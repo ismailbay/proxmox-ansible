@@ -1,5 +1,7 @@
 ---
 creation_rules:
-  - path_regex: .*/secrets\.sops\.ya?ml$
+  - path_regex: .*/secrets.yaml\.sops\.ya?ml$
     encrypted_regex: '.*'
+    age: age15wr79l0v753jpsz0fas0xnavwqucc4sglq4mdx8dssct5g97md6qeslr6r
+  - path_regex: .*/secrets.yaml$
     age: age15wr79l0v753jpsz0fas0xnavwqucc4sglq4mdx8dssct5g97md6qeslr6r

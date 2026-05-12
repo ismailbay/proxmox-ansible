@@ -8,7 +8,7 @@ ansible.log
 .ansible/
 
 # =========================
-# Inventory & secrets
+# Inventory & secrets.yaml
 # =========================
 # Do NOT ignore example inventories
 inventory/**/group_vars/*vault*
