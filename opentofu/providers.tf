@@ -7,6 +7,7 @@ provider "proxmox" {
   api_token = data.sops_file.secrets.data["proxmox.api_token"]
   ssh {
     agent       = false
-    private_key = file("~/.ssh/id_terraform_pve.pub")
+    private_key = file("~/.ssh/id_terraform_pve")
+    username    = "root"
   }
 }

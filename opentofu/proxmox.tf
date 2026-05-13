@@ -811,3 +811,111 @@ resource "proxmox_virtual_environment_vm" "haos" {
     ignore_changes = [mac_addresses]
   }
 }
+
+locals {
+  openbaoVersion = "2.5.3"
+}
+
+resource "proxmox_virtual_environment_file" "openbao-cloud-init" {
+  content_type = "snippets"
+  datastore_id = "local"
+  node_name    = "pve-mini-2"
+
+  source_raw {
+    data = <<-EOF
+    #cloud-config
+    hostname: openbao
+    timezone: Europe/Vienna
+    users:
+      - default
+      - name: ibay
+        groups:
+          - sudo
+        shell: /bin/bash
+        ssh-authorized-keys:
+          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbJSmbCeDjS0o9ggGab+qvesi6zulkfwXv25pBIblT1 macbook"
+        sudo: ALL=(ALL) NOPASSWD:ALL
+    apt:
+      preserve_sources_list: true
+      sources:
+        openbao:
+          keyserver: https://openbao.org/assets/openbao-gpg-pub-20240618.asc
+          keyid: 66D1 5FDD 8728 7219 C8E1  5478 D200 CD70 2853 E6D0
+          source: "deb https://pkgs.openbao.org/deb/ stable main"
+    package_update: true
+    packages:
+      - openssh-client
+      - openssh-server
+      - openbao
+      - qemu-guest-agent
+    runcmd:
+      - systemctl enable qemu-guest-agent
+      - systemctl start qemu-guest-agent
+      - systemctl enable openbao
+      - systemctl start openbao
+    EOF
+
+    file_name = "openbao-cloud-init.yaml"
+  }
+}
+
+resource "proxmox_download_file" "debian_cloud_image" {
+  content_type = "import"
+  datastore_id = "local"
+  node_name    = "pve-mini-2"
+  url          = "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-generic-amd64.qcow2"
+}
+
+resource "proxmox_virtual_environment_vm" "openbao" {
+  name                = "openbao"
+  node_name           = "pve-mini-2"
+  description         = "OpenBao"
+  reboot_after_update = true
+
+  started         = true
+  stop_on_destroy = false
+  on_boot         = true
+
+  tablet_device = false
+
+  cpu {
+    cores   = 2
+    sockets = 1
+  }
+
+  memory {
+    dedicated = 4096
+  }
+
+  agent {
+    enabled = true
+  }
+
+  disk {
+    interface   = "virtio0"
+    iothread    = true
+    discard     = "on"
+    size        = 20
+    import_from = proxmox_download_file.debian_cloud_image.id
+  }
+
+  network_device {
+    mac_address = "02:69:7E:84:A6:37" # static lease 192.168.1.127
+  }
+
+  initialization {
+    ip_config {
+      ipv4 {
+        address = "192.168.1.46/24"
+        gateway = "192.168.1.1"
+      }
+    }
+    user_data_file_id = proxmox_virtual_environment_file.openbao-cloud-init.id
+  }
+
+  operating_system {
+    type = "l26"
+  }
+
+  boot_order = ["scsi0"] # Boot from the SCSI disk
+}
