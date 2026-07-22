@@ -27,18 +27,8 @@
         name: "pveproxy"
         state: "restarted"
 
-- name: Configure mini node settings
-  hosts: proxmox_mini
+- name: Configure nvme
+  hosts: proxmox_nvme
   become: true
   roles:
     - role: nvme
-
-  handlers:
-    - name: Reboot nodes
-      ansible.builtin.reboot:
-        reboot_timeout: 120
-
-    - name: Restart pveproxy
-      ansible.builtin.service:
-        name: "pveproxy"
-        state: "restarted"

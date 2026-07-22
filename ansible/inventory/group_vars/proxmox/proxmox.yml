@@ -18,6 +18,7 @@ proxmox:
     - smartmontools
     - hdparm
     - fio
+    - lldpd
 
 metrics_server:
   # otel collector on pve-rack1, pushed to victoriametrics on pve-rack1

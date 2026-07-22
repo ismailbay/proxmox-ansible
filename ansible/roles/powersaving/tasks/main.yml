@@ -16,7 +16,7 @@
       WantedBy=multi-user.target
   notify: Reload systemd
 
-- name: Enable and start powertop service
+- name: Enable and start cpu_scaling_governor service
   ansible.builtin.systemd:
     name: cpu_scaling_governor
     enabled: true
